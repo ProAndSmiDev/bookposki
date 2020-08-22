@@ -1,0 +1,92 @@
+@import ./variables
+@import ./mixins
+@import ./animations
+
+*,
+*:after,
+*:before
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body
+  margin: 0
+  @include media($width: phone)
+    padding: 0
+  @include media($width: pc)
+    padding: 0 0 20px
+  min-height: 100vh
+  @include font-styles($default-size, $default-color, $default-weight, $default-lh, $default-family)
+
+.wrapper
+  display: flex
+  width: $wrapper
+  align-items: center
+  flex-flow: row wrap
+  justify-content: center
+  @include indents($mt: 0, $mb: 0, $mr: auto, $ml: auto, $pr: 15px, $pl: 15px)
+
+img
+  height: auto
+  max-width: 100%
+
+a
+  position: relative
+  @include font-styles($color: $default-link)
+  &:before
+    width: 0
+    height: 2px
+    @include pseudo
+    background-color: $default-border-link
+    transition:
+      duration: .4s
+      property: width
+      timing-function: ease-in-out
+  &:hover
+    text-decoration: none
+    &:before
+      width: 100%
+
+input
+  @include input-placeholder
+    @include font-styles($size: $default-placeholder-size, $color: $default-placeholder-color)
+  border: 0
+  background: $bg-default-input
+
+ul, ol
+  display: flex
+  list-style: none
+  align-items: center
+  flex-flow: row nowrap
+  justify-content: center
+  @include indents($pl: 0)
+
+button
+  border: 0
+  cursor: pointer
+  background:
+    color: $bg-default-button
+  transition:
+    duration: .4s
+    property: background-color
+    timing-function: ease-in-out
+  &:hover
+    background:
+      color: $bg-default-hover-button
+
+input, textarea, select, button
+  font: inherit
+
+.sr-only
+  border: 0
+  width: 1px
+  padding: 0
+  height: 1px
+  margin: -1px
+  overflow: hidden
+  position: absolute
+  clip: rect(0 0 0 0)
+
+.title
+  @include indents($mb: 20px)
+  @include font-styles($size: $default-title-size, $color: $default-title-color)

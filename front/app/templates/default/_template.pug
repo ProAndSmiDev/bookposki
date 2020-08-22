@@ -1,0 +1,22 @@
+include ../_mixins
+doctype html
+html(lang="")
+  head
+    meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    +meta('viewport', 'width=device-width, initial-scale=1')
+    block SEO
+    each val, i in copyright
+        +meta(i, val)
+    +link('favicon.ico', 'shortcut icon')
+    +link('styles.min', 'stylesheet')
+  body
+    header
+      block header
+
+    main
+      block content
+
+    footer
+      block footer
+
+    +script('app.min')

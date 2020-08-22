@@ -1,0 +1,11 @@
+mixin meta(name, content)
+    meta(name=name content=content)
+
+mixin link(file, rel)
+    if(rel === 'shortcut icon')
+        link(href='/img/' + file, rel=rel)
+    else if(rel === 'stylesheet')
+        link(href='/css/' + file + '.css', rel=rel)
+
+mixin script(file)
+    script(src="/js/" + file + ".js")

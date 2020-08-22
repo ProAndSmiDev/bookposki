@@ -1,0 +1,86 @@
+@mixin media($width, $type: min)
+  $breakpoints: ("phone":320px, "phone-wide":480px, "phablet":560px, "tablet-small":640px,"tablet":768px,"pc":992px,"desktop":1200px,"desktop-wide": 1440px)
+
+  @if map_has_key($breakpoints, $width)
+    $width: map_get($breakpoints, $width)
+    @if $type == max
+      $width: $width - 1px
+    @media only screen and (#{$type}-width: $width)
+      @content
+
+@mixin pseudo($display: block, $pos: absolute, $content: '')
+  content: $content
+  display: $display
+  position: $pos
+
+@mixin responsive-ratio($x,$y, $pseudo: false)
+  $padding: unquote( ( $y / $x ) * 100 + '%' )
+  @if $pseudo
+    &:before
+      width: 100%
+      padding-top: $padding
+      @include pseudo($pos: relative)
+  @else
+    padding-top: $padding
+
+
+
+@mixin font-styles($size: false, $color: false, $weight: false, $lh: false, $family: false)
+  font:
+    @if($size)
+      size: $size
+    @if($weight)
+      weight: $weight
+    @if($family)
+      family: $family
+  @if($color)
+    color: $color
+  @if($lh)
+    line-height: $lh
+
+@mixin indents($mt: false, $mr: false, $mb: false, $ml: false, $pt: false, $pr: false, $pb: false, $pl: false)
+  margin:
+    @if $mt
+      top: $mt
+    @if $mr
+      right: $mr
+    @if $mb
+      bottom: $mb
+    @if $ml
+      left: $ml
+  padding:
+    @if $pt
+      top: $pt
+    @if $pr
+      right: $pr
+    @if $pb
+      bottom: $pb
+    @if $pl
+      left: $pl
+
+@mixin input-placeholder
+  &.placeholder
+    @content
+  &:-moz-placeholder
+    @content
+  &::-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content
+  &::-webkit-input-placeholder
+    @content
+
+@mixin font-family($name, $file, $weight)
+  @font-face
+    font-family: $name
+    font-weight: $weight
+    font-display: block
+    src: url('../fonts/FONTNAME/' + $file) format('truetype')
+
+@mixin pulseColor($red: 255, $green: 255, $blue: 255)
+  0%
+    box-shadow: 0 0 0 0 rgba($red, $green, $blue, .4)
+  70%
+    box-shadow: 0 0 0 10px rgba($red, $green, $blue, 0)
+  100%
+    box-shadow: 0 0 0 0 rgba($red, $green, $blue, 0)
